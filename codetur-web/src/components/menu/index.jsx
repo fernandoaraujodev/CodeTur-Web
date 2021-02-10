@@ -26,7 +26,7 @@ const Menu = () => {
             return(
                 <Nav>
                     <Nav.Link href='/admin/dashboard'>DashBoard</Nav.Link> 
-                    <Nav.Link href='/admin/categorias'>Pacotes</Nav.Link>  
+                    <Nav.Link href='/admin/pacote'>Pacotes</Nav.Link>  
                     <NavDropdown title={jwt_decode(token1).family_name} id="basic-nav-dropdown">
                         <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
                         <NavDropdown.Divider />

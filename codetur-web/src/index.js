@@ -6,22 +6,43 @@ import reportWebVitals from './reportWebVitals';
 //libs
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastProvider } from 'react-toast-notifications';
+import jwt_decode from 'jwt-decode';
 
 //Pages
 import ResetarSenha from './pages/conta/resetarsenha';
 import Login from './pages/conta/login';
+import Pacotes from './pages/admin/pacotes';
+import Dashboard from './pages/admin/dashboard';
+import NotFound from './pages/notfound';
 
-const routing = (
+const RotaPrivadaAdmin = ({component : Component, ...rest}) => (
+  <Route 
+    {...rest}
+    render = { props => 
+        localStorage.getItem('token-codetur') !== null && jwt_decode(localStorage.getItem('token-codetur')).role === 'Admin' ? 
+          (<Component {...props} />) : 
+          (<Redirect to={{ pathname :'/', state :{from : props.location}}} />)
+    }
+  />
+);
+
+const rotas = (
   <Router>
     <Switch>
       <Route path='/' exact component={Login} />
       <Route path='/conta/resetar-senha' component={ResetarSenha} />
+      <RotaPrivadaAdmin path='/admin'  component={Dashboard} />
+      <RotaPrivadaAdmin path='/admin/pacote'  component={Pacotes} />
+      <Route component={NotFound} />
     </Switch>
   </Router>
 )
 
 ReactDOM.render(
-    routing,
+  <ToastProvider>  
+    {rotas}
+  </ToastProvider>,  
   document.getElementById('root')
 );
 
