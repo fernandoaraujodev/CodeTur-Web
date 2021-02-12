@@ -16,8 +16,8 @@ import ContaServico from '../../../services/contaServico';
 
 const Login = () => {
 
-    // const [email, setEmail] = useState('');
-   // const [senha, setSenha] = useState('');
+    //const [email, setEmail] = useState('');
+    //const [senha, setSenha] = useState('');
 
    const history = useHistory();
    const { addToast } = useToasts();
@@ -26,11 +26,12 @@ const Login = () => {
            email : '',
            senha : ''
        },
-       onSubmit : values => {
+       onSubmit : (values, { setSubmitting }) => {
            ContaServico
                .logar(values)
-               .then(resultado => resultado.json())
                .then(resultado => {
+                console.log(`Resultado ${resultado.data}`)
+                setSubmitting(false)
                    if(resultado.sucesso){
                        //apresenta notificação
                        addToast(resultado.data.mensagem, {
@@ -46,7 +47,6 @@ const Login = () => {
                            autoDismiss: true,
                        })
                    }
-               
                })
                .catch(erro => {
                    console.error('erro na api ' + erro);
@@ -61,19 +61,17 @@ const Login = () => {
            <Container className='form-height'>
                <Form className='form-signin' onSubmit={formik.handleSubmit}>
                    <h1>Login</h1>
-                   <small>Informe os dados Abaixo</small>
+                   <small>Informe os seus dados abaixo</small>
                        
                    <hr/>
                    <Form.Group >
-                       <Form.Label>Email </Form.Label>
+                       <Form.Label>Email</Form.Label>
                        <Form.Control type="email" 
                                     name="email"
                                     placeholder="Informe o email" 
                                     value={formik.values.email} 
                                     onChange={formik.handleChange} 
                                     required />
-                       
-                       
                    </Form.Group>
 
                    <Form.Group>
@@ -85,9 +83,7 @@ const Login = () => {
                                     onChange={formik.handleChange}
                                     required/>
                    </Form.Group>
-                   <Button variant="primary" type="submit">
-                       Enviar
-                   </Button>
+                   <Button variant="primary" type="submit">Enviar</Button>
                    <br/><br/>
                    <a href='/resetar-senha' style={{ marginTop :'30px'}}>Esqueci a senha!</a>
                </Form>

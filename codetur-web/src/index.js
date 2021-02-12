@@ -32,8 +32,8 @@ const rotas = (
     <Switch>
       <Route path='/' exact component={Login} />
       <Route path='/conta/resetar-senha' component={ResetarSenha} />
-      <RotaPrivadaAdmin path='/admin'  component={Dashboard} />
-      <RotaPrivadaAdmin path='/admin/pacote'  component={Pacotes} />
+      <RotaPrivadaAdmin path='/admin/pacotes' component={Dashboard} />
+      <RotaPrivadaAdmin path='/admin' component={Pacotes} />
       <Route component={NotFound} />
     </Switch>
   </Router>

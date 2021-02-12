@@ -25,8 +25,8 @@ const Menu = () => {
         if(token1 !== null){
             return(
                 <Nav>
-                    <Nav.Link href='/admin/dashboard'>DashBoard</Nav.Link> 
-                    <Nav.Link href='/admin/pacote'>Pacotes</Nav.Link>  
+                    <Nav.Link href='/admin'>DashBoard</Nav.Link> 
+                    <Nav.Link href='/admin/pacotes'>Pacotes</Nav.Link>  
                     <NavDropdown title={jwt_decode(token1).family_name} id="basic-nav-dropdown">
                         <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
                         <NavDropdown.Divider />

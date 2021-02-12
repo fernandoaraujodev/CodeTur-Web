@@ -1,5 +1,5 @@
 const logar = dados => {
-    return fetch('https://localhost:5001/v1/account/signin', {
+    return fetch('https://192.168.0.16:5001/v1/account/signin', {
         method : 'POST',
         body : JSON.stringify(dados),
         headers : {
