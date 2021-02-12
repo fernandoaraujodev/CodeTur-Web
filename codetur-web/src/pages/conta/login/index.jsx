@@ -14,10 +14,51 @@ import { useToasts } from 'react-toast-notifications';
 //services
 import ContaServico from '../../../services/contaServico';
 
+// const Login = () => {
+
+//     //const [email, setEmail] = useState('');
+//     //const [senha, setSenha] = useState('');
+
+//    const history = useHistory();
+//    const { addToast } = useToasts();
+//    const formik = useFormik({
+//        initialValues :{
+//            email : '',
+//            senha : ''
+//        },
+//        onSubmit : (values, { setSubmitting }) => {
+//            ContaServico
+//                .logar(values)
+//                .then(resultado => {
+//                 console.log(`Resultado ${resultado.data}`)
+//                 setSubmitting(false)
+//                    if(resultado.sucesso){
+//                        //apresenta notificação
+//                        addToast(resultado.data.mensagem, {
+//                            appearance: 'success',
+//                            autoDismiss: true,})
+//                        //salva token localstorage
+//                        localStorage.setItem('token-codetur', resultado.data.token);
+//                        //redireciona pagina admin
+//                        history.push('/admin');
+//                    } else {
+//                        addToast(resultado.data.mensagem, {
+//                            appearance: 'error',
+//                            autoDismiss: true,
+//                        })
+//                    }
+//                })
+//                .catch(erro => {
+//                    console.error('erro na api ' + erro);
+//                })
+       
+//        }
+//    })
+
 const Login = () => {
 
-    //const [email, setEmail] = useState('');
-    //const [senha, setSenha] = useState('');
+    // const [email, setEmail] = useState('');
+   // const [senha, setSenha] = useState('');
 
    const history = useHistory();
    const { addToast } = useToasts();
@@ -26,12 +67,11 @@ const Login = () => {
            email : '',
            senha : ''
        },
-       onSubmit : (values, { setSubmitting }) => {
+       onSubmit : values => {
            ContaServico
                .logar(values)
+               .then(resultado => resultado.json())
                .then(resultado => {
-                console.log(`Resultado ${resultado.data}`)
-                setSubmitting(false)
                    if(resultado.sucesso){
                        //apresenta notificação
                        addToast(resultado.data.mensagem, {
@@ -47,6 +87,7 @@ const Login = () => {
                            autoDismiss: true,
                        })
                    }
+               
                })
                .catch(erro => {
                    console.error('erro na api ' + erro);
